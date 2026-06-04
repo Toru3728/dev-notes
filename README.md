@@ -1,7 +1,7 @@
 # dev-notes
 
 A small collection of personal development notes and cheat sheets.
-This repository is mainly documantation — short, practical references I want to keep handy.
+This repository is mainly documentation — short, practical references I want to keep handy.
 
 ## Contents
 
@@ -16,7 +16,7 @@ Each note is written in Markdown so it renders nicely on GitHub.
 ## Contributing
 
 Small fixes are welcome — typos, clearer wording, or new notes.
-Open a pull request with you change and a short description.
+Open a pull request with your change and a short description.
 
 ## License
 
