@@ -6,6 +6,7 @@ This repository is mainly documentation — short, practical references I want t
 ## Contents
 
 - [Git cheat sheet](docs/git-cheatsheet.md)
+- [GitHub CLI cheat sheet](docs/github-cli-cheatsheet.md)
 - [Markdown tips](docs/markdown-tips.md)
 
 ## How to use
