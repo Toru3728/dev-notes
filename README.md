@@ -9,6 +9,7 @@ This repository is mainly documentation — short, practical references I want t
 - [GitHub CLI cheat sheet](docs/github-cli-cheatsheet.md)
 - [Markdown tips](docs/markdown-tips.md)
 - [議事録作成の自動化](docs/meeting-minutes-automation.md)
+  - [議事録テンプレート（.docx）](templates/meeting-minutes-template.docx)
 
 ## How to use
 

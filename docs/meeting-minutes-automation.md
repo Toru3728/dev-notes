@@ -120,6 +120,21 @@ faster-whisper 2026-08-26_担当者会議.m4a \
 
 Claude は Word 作成用のスキルを持っているので、見出し・表・ページ番号まで入った .docx がそのまま出てくる。
 
+### 空のテンプレートから始めたいとき
+
+このリポジトリに雛形を置いてある。→ [議事録テンプレート（.docx）](../templates/meeting-minutes-template.docx)
+
+A4 縦・游ゴシック 10.5pt、会議情報の表、決定事項と ToDo の表、フッタのページ番号、
+末尾の配布前チェック欄まで入っている。`〔…〕` のグレー文字が差し替え箇所。
+
+Claude に「このテンプレートの体裁で」と渡せば、そのまま埋めた .docx が返ってくる。
+体裁を変えたいときは [ビルドスクリプト](../templates/build-meeting-minutes-template.js) を直して作り直す。
+
+```bash
+npm install docx
+node templates/build-meeting-minutes-template.js
+```
+
 ### 保存とファイル名の決め事
 
 - ファイル名：`議事録_YYYY-MM-DD_会議名.docx`
