@@ -4,3 +4,10 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+
+# Obsidian (作業状態ファイルは頻繁に変わるので除外)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# 業務データは別のプライベートリポジトリで管理（このリポジトリは公開のため除外）
+company/
