@@ -11,3 +11,6 @@ Thumbs.db
 
 # 業務データは別のプライベートリポジトリで管理（このリポジトリは公開のため除外）
 company/
+
+# 業務内容を含むコマンドは公開リポジトリに入れない（正は company/.claude/commands/）
+.claude/commands/my-note.md
