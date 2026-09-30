@@ -15,8 +15,8 @@
 const fs = require("fs");
 const path = require("path");
 const {
-  AlignmentType, BorderStyle, Document, Packer, PageOrientation, Paragraph,
-  Table, TableCell, TableRow, TextRun, VerticalAlign, WidthType,
+  AlignmentType, BorderStyle, Document, HeightRule, Packer, PageOrientation,
+  Paragraph, Table, TableCell, TableRow, TextRun, VerticalAlign, WidthType,
 } = require("docx");
 
 const MARGIN = 850;                       // 15mm
@@ -31,6 +31,10 @@ const SHIMEI_W = PAIR - SHOZOKU_W;
 // 端数は最後の氏名列で吸収して、合計を本文幅にそろえる
 const ATTEND_COLS = [SHOZOKU_W, SHIMEI_W, SHOZOKU_W, SHIMEI_W, SHOZOKU_W,
                      CW - LABEL_W - (SHOZOKU_W + SHIMEI_W) * 2 - SHOZOKU_W];
+
+// 記入できる高さを確保する（空のままだと行が潰れて罫線が詰まって見える）
+const ATTEND_ROW_H = 500;   // 出席者1行ぶん
+const BODY_ROW_H = 1100;    // 検討内容などの記入枠
 
 const FONT = "游ゴシック";
 const RED = "C00000";     // 様式上の赤字（利用者・家族の出席、※備考）
@@ -128,6 +132,7 @@ function buildDoc(d) {
 
   // ---- 本文欄のラベル（2行ぶんの記入枠を持つ）----
   const bodyRow = (label, sub, contentParas) => new TableRow({
+    height: { value: BODY_ROW_H, rule: HeightRule.ATLEAST },
     children: [
       gridCell([
         para([run(label)], { alignment: AlignmentType.CENTER }),
@@ -142,7 +147,10 @@ function buildDoc(d) {
     width: { size: CW, type: WidthType.DXA },
     rows: [
       new TableRow({
-        tableHeader: true,
+        // tableHeader は付けない。第4表は全体が1枚の表なので、
+        // ページをまたぐと2ページ目の先頭に「会議出席者」が再掲されてしまう
+        cantSplit: true,
+        height: { value: ATTEND_ROW_H, rule: HeightRule.ATLEAST },
         children: [
           attendLabel,
           ...["所 属(職種)", "氏　名", "所 属(職種)", "氏　名", "所 属(職種)", "氏　名"]
@@ -150,6 +158,8 @@ function buildDoc(d) {
         ],
       }),
       ...[0, 1, 2].map(r => new TableRow({
+        cantSplit: true,
+        height: { value: ATTEND_ROW_H, rule: HeightRule.ATLEAST },
         children: [0, 1, 2].flatMap(c => {
           const [shozoku, shimei] = at(r * 3 + c);
           return [
