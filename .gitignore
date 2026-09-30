@@ -14,3 +14,9 @@ company/
 
 # 業務内容を含むコマンドは公開リポジトリに入れない（正は company/.claude/commands/）
 .claude/commands/my-note.md
+
+# 議事録テンプレートのビルド成果物（プロファイルから再生成できる）
+templates/built/
+
+# npm install docx で作られる（テンプレート生成のときだけ必要）
+node_modules/
