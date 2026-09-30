@@ -11,11 +11,12 @@ docs/meeting-minutes-automation.md       使う人向けの手順書
 docs/meeting-minutes-internals.md        このファイル
 templates/
 ├── meeting-minutes-template.docx        標準体裁の空テンプレート（default.json から生成）
-├── build-meeting-minutes-template.js    プロファイル → .docx
+├── build-meeting-minutes-template.js    プロファイル → .docx（事業所ごとに変わる議事録用）
+├── build-careplan-4.js                  第4表専用（法定様式で形が固定のため分けてある）
 ├── check-minutes.py                     配布前チェック
 └── profiles/
     ├── default.json                     標準の体裁
-    ├── careplan-4.json                  ケアプラン第4表（サービス担当者会議の要点）
+    ├── careplan-4.json                  第4表の欄の定義（build-careplan-4.js の参照用）
     └── sample-office.json               写真から起こしたプロファイルの見本（架空）
 ```
 
@@ -107,6 +108,24 @@ python3 templates/check-minutes.py <議事録.docx> --preview <出力先ディ�
 配布前チェック欄より後ろの段落は他の検査から除外している。
 あの欄は「［要確認］が残っていないか」という点検文を含むので、
 混ぜると自分自身を誤検知する。
+
+### 第4表（サービス担当者会議の要点）
+
+A4 **横**。左にラベル列を持つ1枚の表で、会議出席者は
+「所属(職種)｜氏名」を**3組横に並べた6列 × 3行**。ラベルセルには様式側の赤字で
+「利用者・家族の出席（本人【 】／家族【 】／続柄）」と「※備考」が入る。
+利用者名の後ろは「様」ではなく**「殿」**。
+
+```bash
+node templates/build-careplan-4.js                 # 空の様式
+node templates/build-careplan-4.js <データ.json>   # 記入済み
+```
+
+データJSONのキーは様式の欄名そのもの。欄の一覧は `templates/profiles/careplan-4.json`。
+
+docx-js は `PageOrientation.LANDSCAPE` のとき幅と高さを内部で入れ替えるので、
+**渡す寸法は縦向きのもの**（11906 × 16838）。横向きの寸法を渡すと縦の幅に
+戻されて表が用紙からはみ出す。本文幅は 16838 − 余白×2 = 15138。
 
 ### 法定様式のとき（第4表など）
 
