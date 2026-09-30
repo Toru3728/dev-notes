@@ -31,6 +31,10 @@ W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 PLACEHOLDER = re.compile(r"〔[^〕]*〕")
 # 「未定」「TBD」など、埋まっていない印
 UNSET = re.compile(r"(未定|TBD|tbd|未記入|要記入)")
+# AI が推測した箇所のタグ（ケアプラン系の様式で使う）
+AI_TAG = "［AI提案・要確認］"
+# タグの説明をしている注記行（それ自体はマーカーではない）
+TAG_NOTE = re.compile(r"タグを削除")
 # 仮名化の形（A様・B様…）。これ以外の「◯◯様/さん」は実名の疑い
 PSEUDONYM = re.compile(r"^[A-Z]様$")
 REAL_NAME = re.compile(r"([一-龥ぁ-んァ-ヶーA-Za-z]{2,6})(様|さん|氏)")
@@ -115,20 +119,49 @@ def body_only(paragraphs):
 
 
 def check_needs_confirmation(paragraphs, tables, report):
-    """［要確認］が残っていたら配布できない。"""
-    hits = [t for t in paragraphs if "要確認" in t]
+    """未確認の印が残っていたら、まだ出せない。
+
+    ［AI提案・要確認］（AI が推測した箇所）と ［要確認］（聞き取れなかった箇所）は
+    直す人が違うので分けて報告する。前者はケアマネジャーが判断してタグを外す、
+    後者は音声に戻って確認する。
+    """
+    texts = list(paragraphs)
     for rows in tables:
         for row in rows:
-            for cellv in row:
-                if "要確認" in cellv:
-                    hits.append(cellv)
-    # 節見出し自体（「［要確認］一覧」）は中身が空なら問題なし
-    real = [h for h in hits if h.strip() not in ("［要確認］一覧",)
-            and not h.strip().startswith("〔") and "要確認" in h]
-    real = [h for h in real if not re.fullmatch(r"\d*\.?\s*［要確認］一覧", h.strip())]
-    if real:
-        sample = "\n".join(f"- {h.strip()[:70]}" for h in real[:5])
-        report.blocker(f"［要確認］が {len(real)} 件残っている", sample)
+            texts += row
+
+    ai_tags, gaps = [], []
+    for t in texts:
+        stripped = t.strip()
+        if "要確認" not in stripped:
+            continue
+        # タグの使い方を説明している注記そのものは数えない
+        if TAG_NOTE.search(stripped):
+            continue
+        # 空の「［要確認］一覧」見出しは問題なし
+        if re.fullmatch(r"\d*\.?\s*［要確認］一覧", stripped):
+            continue
+        if stripped.startswith("〔"):
+            continue
+        if AI_TAG in stripped:
+            ai_tags.append(stripped)
+        else:
+            gaps.append(stripped)
+
+    def excerpt(items):
+        return "\n".join(f"- {h[:70]}" for h in items[:5])
+
+    if ai_tags:
+        report.blocker(
+            f"AI が推測した箇所（{AI_TAG}）が {len(ai_tags)} 件ある",
+            excerpt(ai_tags)
+            + "\nケアマネジャーが内容を確認し、タグを削除してから提出する",
+        )
+    if gaps:
+        report.blocker(
+            f"［要確認］が {len(gaps)} 件残っている",
+            excerpt(gaps) + "\n音声・元の資料に戻って確認する",
+        )
 
 
 def check_placeholders(paragraphs, tables, report):

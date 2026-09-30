@@ -1,0 +1,41 @@
+{
+  "profileName": "careplan-4",
+  "note": "ケアプラン第4表（サービス担当者会議の要点）。厚生労働省の標準様式に沿う。法定様式なので欄を足さない（improvements は全て false）。AI が推測した箇所には本文中に ［AI提案・要確認］ を付ける運用とし、ケアマネジャーが確認してタグを外すまでは提出しない。",
+  "source": "複数の自治体・研修機関が公開している第4表の様式から項目名を再構成。手元の様式と必ず突き合わせる",
+  "page": { "orientation": "portrait", "marginMm": 15 },
+  "font": { "name": "游ゴシック", "sizePt": 10.5 },
+  "headingColor": "000000",
+  "title": "第４表　サービス担当者会議の要点",
+  "headerText": "",
+  "infoLabelWidth": 3000,
+  "infoFields": [
+    { "label": "作成年月日", "placeholder": "〔　　年　　月　　日〕" },
+    { "label": "利用者名", "placeholder": "〔A様 と仮名化して記入〕" },
+    { "label": "居宅サービス計画作成者（担当者）氏名", "placeholder": "〔氏名〕" },
+    { "label": "開催日", "placeholder": "〔　　年　　月　　日〕" },
+    { "label": "開催場所", "placeholder": "〔　　　　　〕" },
+    { "label": "開催時間", "placeholder": "〔　　:　　〜　　:　　〕" },
+    { "label": "開催回数", "placeholder": "〔第　　回〕" }
+  ],
+  "sections": [
+    {
+      "heading": "会議出席者",
+      "type": "table",
+      "rows": 8,
+      "columns": [
+        { "label": "所属（職種）", "weight": 5 },
+        { "label": "氏名", "weight": 4 }
+      ],
+      "note": "※会議に出席できなかった担当者がいる場合は、その者の所属（職種）・氏名と、出席できない理由も記載する"
+    },
+    { "heading": "検討した項目", "type": "text", "placeholder": "〔会議で検討した項目を番号付きで〕" },
+    { "heading": "検討内容", "type": "text", "placeholder": "〔サービス内容だけでなく、提供方法・留意点・頻度・時間数・担当者まで具体的に。第三者が読んで理解できるように〕" },
+    { "heading": "結論", "type": "text", "placeholder": "〔会議での結論〕" },
+    { "heading": "残された課題（次回の開催時期）", "type": "text", "placeholder": "〔今回解決できなかった内容と、次回の開催予定〕" }
+  ],
+  "improvements": {
+    "todoOwnerDeadline": false,
+    "needsCheckSection": false,
+    "preDistributionChecklist": false
+  }
+}
