@@ -10,7 +10,7 @@ This repository is mainly documentation — short, practical references I want t
 - [Markdown tips](docs/markdown-tips.md)
 - [議事録作成の自動化](docs/meeting-minutes-automation.md)
   - [議事録テンプレート（.docx）](templates/meeting-minutes-template.docx)
-  - [書式プロファイル](templates/profiles/) — 事業所ごとの様式に合わせるための設定
+  - [議事録自動化の仕組み](docs/meeting-minutes-internals.md) — 体裁やチェック項目を変えるとき
 
 ## How to use
 
