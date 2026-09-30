@@ -1,0 +1,56 @@
+{
+  "profileName": "sample-office",
+  "note": "写真1枚から起こしたプロファイルの見本（架空の事業所）。項目名と並びはお手本どおり、担当／期限・［要確認］・配布前チェックは improvements で足している。実在の事業所のものは company/secretary/minutes/formats/ に置く（このリポジトリは公開のため）。",
+  "source": "お手本：紙の様式を写真で撮影（2026-09-30）",
+  "page": { "orientation": "portrait", "marginMm": 25 },
+  "font": { "name": "MS 明朝", "sizePt": 10.5 },
+  "headingColor": "000000",
+  "title": "サービス担当者会議 記録",
+  "headerText": "",
+  "infoFields": [
+    { "label": "利用者名", "placeholder": "〔A様 と仮名化して記入〕" },
+    { "label": "開催日時", "placeholder": "〔年月日・曜日・開始〜終了〕" },
+    { "label": "開催場所", "placeholder": "〔　　　　　〕" },
+    { "label": "出席者", "placeholder": "〔所属・職種・氏名〕" },
+    { "label": "欠席者と理由", "placeholder": "〔いなければ「なし」〕" },
+    { "label": "作成者", "placeholder": "〔氏名〕" }
+  ],
+  "sections": [
+    {
+      "heading": "1. 検討した項目",
+      "type": "text",
+      "placeholder": "〔お手本の項目名のまま〕"
+    },
+    {
+      "heading": "2. 検討内容",
+      "type": "text",
+      "placeholder": "〔お手本の項目名のまま〕"
+    },
+    {
+      "heading": "3. 結論",
+      "type": "table",
+      "role": "decisions",
+      "rows": 4,
+      "columns": [
+        { "label": "No", "weight": 1 },
+        { "label": "結論", "weight": 7 },
+        { "label": "備考", "weight": 4 }
+      ]
+    },
+    {
+      "heading": "4. 残された課題（次回の検討事項）",
+      "type": "table",
+      "role": "todo",
+      "rows": 4,
+      "columns": [
+        { "label": "No", "weight": 1 },
+        { "label": "課題", "weight": 7 }
+      ]
+    }
+  ],
+  "improvements": {
+    "todoOwnerDeadline": true,
+    "needsCheckSection": true,
+    "preDistributionChecklist": true
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "profileName": "default",
+  "note": "このリポジトリの標準体裁。お手本が無いとき・社内用のときはこれを使う。",
+  "page": {
+    "orientation": "portrait",
+    "marginMm": 20
+  },
+  "font": {
+    "name": "游ゴシック",
+    "sizePt": 10.5
+  },
+  "headingColor": "0F766E",
+  "title": "議 事 録",
+  "headerText": "〔会議名〕",
+  "infoLabelWidth": 2200,
+  "infoFields": [
+    {
+      "label": "会議名",
+      "placeholder": "〔例〕○○事業所 サービス担当者会議"
+    },
+    {
+      "label": "日時",
+      "placeholder": "〔例〕2026年8月26日（水）14:00〜15:00"
+    },
+    {
+      "label": "場所",
+      "placeholder": "〔例〕○○事業所 会議室 ／ オンライン（Zoom）"
+    },
+    {
+      "label": "出席者",
+      "placeholder": "〔所属・氏名を列挙〕"
+    },
+    {
+      "label": "欠席者",
+      "placeholder": "〔いなければ「なし」〕"
+    },
+    {
+      "label": "記録者",
+      "placeholder": "〔氏名〕"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "1. 議題",
+      "type": "text",
+      "placeholder": "〔議題を番号付きで列挙する〕"
+    },
+    {
+      "heading": "2. 議論の要旨",
+      "type": "text",
+      "placeholder": "〔議題ごとに 3〜5 行。誰が何を言ったかではなく、何が論点でどう整理されたかを書く〕"
+    },
+    {
+      "heading": "3. 決定事項",
+      "type": "table",
+      "role": "decisions",
+      "rows": 3,
+      "columns": [
+        {
+          "label": "No",
+          "width": 800
+        },
+        {
+          "label": "決定事項",
+          "width": 6000
+        },
+        {
+          "label": "補足・根拠",
+          "width": 2838
+        }
+      ],
+      "note": "※「決まったこと」だけを書く。検討中のものは 2. の要旨側に残す。"
+    },
+    {
+      "heading": "4. ToDo",
+      "type": "table",
+      "role": "todo",
+      "rows": 3,
+      "columns": [
+        {
+          "label": "No",
+          "width": 800
+        },
+        {
+          "label": "内容",
+          "width": 4838
+        },
+        {
+          "label": "担当",
+          "width": 2000
+        },
+        {
+          "label": "期限",
+          "width": 2000
+        }
+      ],
+      "note": "※担当と期限が空欄の ToDo は残さない。決められないなら「次回までに決める」を ToDo にする。"
+    },
+    {
+      "heading": "5. 次回予定",
+      "type": "text",
+      "placeholder": "〔日時・場所・主な議題〕"
+    },
+    {
+      "heading": "6. ［要確認］一覧",
+      "type": "text",
+      "role": "needs-check",
+      "placeholder": "〔文字起こしから読み取れなかった箇所・裏取りが必要な数字をここに集める。空になったら配布可〕"
+    }
+  ],
+  "improvements": {
+    "todoOwnerDeadline": true,
+    "needsCheckSection": true,
+    "preDistributionChecklist": true
+  }
+}
