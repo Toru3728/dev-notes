@@ -94,3 +94,4 @@
   - `/my-stamp` … LINEスタンプ制作・販売サポート（企画→SVG生成→PNG/ZIP化→申請）。作業場所は company/stamp/
   - `/my-shorts` … 介護系YouTubeショート（ネタ→台本→制作→公開→分析）。作業場所は company/shorts/
   - `/my-teian` … ヒヤリング内容（シートの写真 or メモ）→ 提案書下書き。proposals/ に保存。ディスパッチからの利用を想定
+  - `/my-codex-review` … 指定ファイル（提案書・note記事など）をCodex CLIに読ませて別視点レビュー。AGENTS.md の方針で実行（原文は書き換えない）
